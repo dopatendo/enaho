@@ -7,3 +7,4 @@ ztools/
 ^_pkgdown\.yml$
 ^docs$
 ^pkgdown$
+.gitignore
