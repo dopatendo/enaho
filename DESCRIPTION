@@ -1,0 +1,18 @@
+Package: enaho
+Type: Package
+Title: What the Package Does (Title Case)
+Version: 0.1.0
+Authors@R: person(given = "Andrés",
+                    family = "Christiansen",
+                    role = c("aut", "cre"),
+                    email = "andres.christiansen@iea-hamburg.de")
+Maintainer: Andrés Christiansen <andres.christiansen@iea-hamburg.de>
+Description: More about what it does (maybe more than one line).
+    Continuation lines should be indented.
+License: GPL (>= 2.0)
+Encoding: UTF-8
+Language: es
+LazyData: true
+RoxygenNote: 7.3.2
+Depends: 
+    R (>= 4.2)

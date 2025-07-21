@@ -1,0 +1,6 @@
+^.*\.Rproj$
+^\.Rproj\.user$
+ztools/
+.Rhistory
+.DS_Store
+^README\.Rmd$
