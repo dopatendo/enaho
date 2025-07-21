@@ -4,3 +4,6 @@ ztools/
 .Rhistory
 .DS_Store
 ^README\.Rmd$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$
