@@ -4,12 +4,16 @@ output: github_document
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
+
+
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
-  collapse = TRUE
+  collapse = TRUE,
+  # comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
 )
 ```
-
 
 # enaho
 
@@ -21,9 +25,6 @@ library(enaho)
 El paquete `enaho` permite descargar, leer y combinar bases del Instituto Nacional de Estadística e Informática (INEI) del Perú.
 
 
-<!-- badges: start -->
-[![](https://img.shields.io/github/r-package/v/dopatendo/enaho)](https://github.com/dopatendo/enaho)
-<!-- badges: end -->
 
 ## Instalación
 

@@ -8,3 +8,4 @@ ztools/
 ^docs$
 ^pkgdown$
 .gitignore
+^\.github$

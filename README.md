@@ -6,11 +6,6 @@
 El paquete `enaho` permite descargar, leer y combinar bases del
 Instituto Nacional de Estadística e Informática (INEI) del Perú.
 
-<!-- badges: start -->
-
-[![](https://img.shields.io/github/r-package/v/dopatendo/enaho)](https://github.com/dopatendo/enaho)
-<!-- badges: end -->
-
 ## Instalación
 
 Puede instalar la versión desarrollador de `enaho` usando:
