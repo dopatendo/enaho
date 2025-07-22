@@ -8,7 +8,7 @@
 #'
 #' @examples
 #' directorio = system.file("extdata", package = "enaho")
-#' leido <- leer.inei(modulo = 37, annos = 2011, directorio = directorio, tipo = c("t1","t2"))
+#' leido <- leer.inei(modulo = 37, periodos = 2011, directorio = directorio, tipo = c("t1","t2"))
 #' combinar.inei(leido)
 #'
 #' @returns un data frame.

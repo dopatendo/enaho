@@ -7,7 +7,7 @@
 leer.inei.web(
   encuesta = "ENAHO",
   modulo,
-  annos,
+  periodos,
   tipo = "anual",
   ensilencio = FALSE,
   combinar = FALSE,
@@ -20,7 +20,7 @@ leer.inei.web(
 
 \item{modulo}{el código del módulo deseado.}
 
-\item{annos}{los años deseados.}
+\item{periodos}{los años deseados.}
 
 \item{tipo}{el tipo de período deseado. Las opciones son \code{"anual"},
   \code{"t1"} (primer trimestre),
@@ -42,6 +42,6 @@ Lee bases de la ENAHO deste la web del INEI. Aplica las mismas reglas que
 \code{\link{leer.inei}}.
 }
 \examples{
-leer.inei.web(modulo = 37, annos = 2011, tipo = "t1")
+leer.inei.web(modulo = 37, periodos = 2011, tipo = "t1")
 
 }

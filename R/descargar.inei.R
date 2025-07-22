@@ -5,7 +5,7 @@
 #' @param encuesta el nombre de una encuesta del INEI. Las opciones dispobibles son
 #' \code{"ENAHO"} y \code{"ENAHOpanel"}. No importa si está escrito en mayúscula o minúscula.
 #' @param modulo el código del módulo deseado.
-#' @param annos los años deseados.
+#' @param periodos los años deseados.
 #' @param dirdescarga el directorio de descarga.
 #' @param tipo el tipo de período deseado. Las opciones son \code{"anual"},
 #'   \code{"t1"} (primer trimestre),
@@ -16,7 +16,7 @@
 # @param descomprimir un valor lógico que indica si la descarga debe ser descomprimida.
 #'
 #' @examples
-##' descargar.inei(modulo = 37, anno = 2011, dirdescarga = tempdir(), tipo = "t1")
+#' descargar.inei(modulo = 37, periodos = 2011, dirdescarga = tempdir(), tipo = "t1")
 #'
 #' @returns guarda los archivos descargados en el disco.
 #'
@@ -25,7 +25,7 @@
 #'
 
 descargar.inei <- function(encuesta = "ENAHO",
-                           modulo, annos,
+                           modulo, periodos,
                            dirdescarga = getwd(),
                            tipo = "anual",
                            # descomprimir = TRUE,
@@ -48,22 +48,25 @@ descargar.inei <- function(encuesta = "ENAHO",
 
 
   if(tipo[1]=="anual"){
-    mm <- modulos.desc(encuesta = encuesta, modulos = modulo,mostrarannos = TRUE)
-    CE <-   mods <- readRDS(file.path(system.file("extdata",package = "enaho"),
+
+    mm <- readRDS(file.path(system.file("extdata",package = "enaho"),
+                              "modulosdata.rds"))[,c(2,3,4)]
+
+    CE <- readRDS(file.path(system.file("extdata",package = "enaho"),
                                       "codigosencuesta.rds"))
     CE <- CE[(CE$encuesta%in%encuesta)&(CE[,2]%in%strsplit(mm[,3],";")[[1]])&(CE$tipo==tipo),]
-    CE <- CE[CE[,2]%in%annos,]
+    CE <- CE[CE[,2]%in%periodos,]
   }else{
     mm <- readRDS(file.path(system.file("extdata",package = "enaho"),
                             "modulosdata.rds"))
     mm <- mm[as.numeric(mm[,2])%in%as.numeric(modulo),]
-    CE <-   mods <- readRDS(file.path(system.file("extdata",package = "enaho"),
+    CE <-   readRDS(file.path(system.file("extdata",package = "enaho"),
                                       "codigosencuesta.rds"))
     CE <- CE[CE$encuesta%in%encuesta,]
     CE <- CE[paste0(CE[,2],"-",CE[,4])%in%unlist(strsplit(mm[,5],";")),]
     CE <- CE[CE$tipo%in%tipo,]
 
-    CE <- CE[CE[,2]%in%annos,]
+    CE <- CE[CE[,2]%in%periodos,]
 
 
   }

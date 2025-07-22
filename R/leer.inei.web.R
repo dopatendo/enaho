@@ -6,7 +6,7 @@
 #' @inheritParams leer.inei
 #'
 #' @examples
-#' leer.inei.web(modulo = 37, annos = 2011, tipo = "t1")
+#' leer.inei.web(modulo = 37, periodos = 2011, tipo = "t1")
 #'
 #' @returns un data frame o una lista.
 #'
@@ -18,7 +18,7 @@
 
 
 leer.inei.web <- function(encuesta = "ENAHO",
-                          modulo, annos,
+                          modulo, periodos,
                           tipo = "anual",
                           ensilencio = FALSE,
                           combinar = FALSE,
@@ -35,13 +35,13 @@ leer.inei.web <- function(encuesta = "ENAHO",
 
   descargar.inei(encuesta = encuesta,
                  modulo = modulo,
-                 annos = annos,
+                 periodos = periodos,
                  dirdescarga = file.path(tempdir(),"LEER"),
                  tipo = tipo,
                  ensilencio = ensilencio)
 
-  arks = list.files(file.path(tempdir(),"LEER"),full.names = TRUE)
-  arkn <- gsub(paste0(encuesta,"_"),"",gsub("/","",gsub(file.path(tempdir(),"LEER"),"",arks)))
+  arks <- list.files(file.path(tempdir(),"LEER"),full.names = TRUE)
+  arkn <- gsub(paste0(encuesta,"_"),"",basename(arks))
 
 
   if(!ensilencio){

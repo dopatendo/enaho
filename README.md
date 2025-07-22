@@ -16,14 +16,14 @@ remotes::install_github("dopatendo/enaho")
 
 ## Identificar bases y módulos disponibles
 
-Para identificar qué bases y módulos están disponibles, use
-`modulos.desc()`. Debe introducir qué encuesta quiere consultar
-(`"ENAHO"` o `"ENAHOpanel"`), y qué módulos. Si omite el nombre de la
-encuesta se usará `"ENAHO"`. Si omite los módulos, se mostrarán todos
-los disponibles:
+Para identificar qué bases y módulos están disponibles, use `modulos()`.
+Debe introducir qué encuesta quiere consultar (`"ENAHO"` o
+`"ENAHOpanel"`), y qué módulos. Si omite el nombre de la encuesta se
+usará `"ENAHO"`. Si omite los módulos, se mostrarán todos los
+disponibles:
 
 ``` r
-modulos.desc(encuesta = "ENAHO")
+modulos(encuesta = "ENAHO")
 ##                                                           Nombre Módulo
 ## 1                     Características de la Vivienda y del Hogar     01
 ## 2                      Características de los Miembros del Hogar     02
@@ -60,26 +60,67 @@ modulos.desc(encuesta = "ENAHO")
 ```
 
 También puede obtener los años para los que cada módulo está disponible
-usando `mostrarannos = TRUE`
+usando el argumento `modulo`:
 
 ``` r
-modulos.desc(encuesta = "ENAHO", modulos = c(29,32), mostrarannos = TRUE)
-##                           Nombre Módulo           Años
-## 24 Condiciones de vida y Pobreza     29 2004;2005;2006
+modulos(encuesta = "ENAHO", modulo = c(1,2))
+##                                        Nombre Módulo  Año Anual T1 T2 T3 T4
+## 1  Características de la Vivienda y del Hogar     01 2004     1  0  0  0  0
+## 2  Características de la Vivienda y del Hogar     01 2005     1  0  0  0  0
+## 3  Características de la Vivienda y del Hogar     01 2006     1  0  0  0  0
+## 4  Características de la Vivienda y del Hogar     01 2007     1  0  0  0  0
+## 5  Características de la Vivienda y del Hogar     01 2008     1  0  0  0  0
+## 6  Características de la Vivienda y del Hogar     01 2009     1  0  0  0  0
+## 7  Características de la Vivienda y del Hogar     01 2010     1  0  0  0  0
+## 8  Características de la Vivienda y del Hogar     01 2011     1  1  1  1  1
+## 9  Características de la Vivienda y del Hogar     01 2012     1  1  1  1  1
+## 10 Características de la Vivienda y del Hogar     01 2013     1  1  1  1  1
+## 11 Características de la Vivienda y del Hogar     01 2014     1  1  1  1  1
+## 12 Características de la Vivienda y del Hogar     01 2015     1  1  1  1  1
+## 13 Características de la Vivienda y del Hogar     01 2016     1  1  1  1  1
+## 14 Características de la Vivienda y del Hogar     01 2017     1  1  1  1  1
+## 15 Características de la Vivienda y del Hogar     01 2018     1  1  1  1  1
+## 16 Características de la Vivienda y del Hogar     01 2019     1  1  1  1  1
+## 17 Características de la Vivienda y del Hogar     01 2020     1  1  1  1  1
+## 18 Características de la Vivienda y del Hogar     01 2021     1  1  1  1  1
+## 19 Características de la Vivienda y del Hogar     01 2022     1  1  1  1  1
+## 20 Características de la Vivienda y del Hogar     01 2023     1  1  1  1  1
+## 21 Características de la Vivienda y del Hogar     01 2024     1  1  1  1  1
+## 22  Características de los Miembros del Hogar     02 2004     1  0  0  0  0
+## 23  Características de los Miembros del Hogar     02 2005     1  0  0  0  0
+## 24  Características de los Miembros del Hogar     02 2006     1  0  0  0  0
+## 25  Características de los Miembros del Hogar     02 2007     1  0  0  0  0
+## 26  Características de los Miembros del Hogar     02 2008     1  0  0  0  0
+## 27  Características de los Miembros del Hogar     02 2009     1  0  0  0  0
+## 28  Características de los Miembros del Hogar     02 2010     1  0  0  0  0
+## 29  Características de los Miembros del Hogar     02 2011     1  1  1  1  1
+## 30  Características de los Miembros del Hogar     02 2012     1  1  1  1  1
+## 31  Características de los Miembros del Hogar     02 2013     1  1  1  1  1
+## 32  Características de los Miembros del Hogar     02 2014     1  1  1  1  1
+## 33  Características de los Miembros del Hogar     02 2015     1  1  1  1  1
+## 34  Características de los Miembros del Hogar     02 2016     1  1  1  1  1
+## 35  Características de los Miembros del Hogar     02 2017     1  1  1  1  1
+## 36  Características de los Miembros del Hogar     02 2018     1  1  1  1  1
+## 37  Características de los Miembros del Hogar     02 2019     1  1  1  1  1
+## 38  Características de los Miembros del Hogar     02 2020     1  1  1  1  1
+## 39  Características de los Miembros del Hogar     02 2021     1  1  1  1  1
+## 40  Características de los Miembros del Hogar     02 2022     1  1  1  1  1
+## 41  Características de los Miembros del Hogar     02 2023     1  1  1  1  1
+## 42  Características de los Miembros del Hogar     02 2024     1  1  1  1  1
 ```
 
 ## Descargar bases
 
 Para descargar bases use `descargar.inei()`. Tendrá que seleccionar un
-módulo con `modulo`; los años que necesite con `annos`; el directorio de
-descarga con `dirdescarga`; y el período usando `"anual"`, `"t1"`,
+módulo con `modulo`; los años que necesite con `periodos`; el directorio
+de descarga con `dirdescarga`; y el período usando `"anual"`, `"t1"`,
 `"t2"`, `"t3"`, `"t4"`.
 
 Por ejemplo, para descargar el módulo 37 del primer trimestre de 2011 en
 el directorio temporal:
 
 ``` r
-descargar.inei(encuesta = "ENAHO", modulo = 37, anno = 2011, tipo = "t1", dirdescarga = tempdir())
+descargar.inei(encuesta = "ENAHO", modulo = 37, periodos = 2011, tipo = "t1", dirdescarga = tempdir())
 ## Descargando 1 archivo.
 ```
 
@@ -107,14 +148,14 @@ de una base es leída, la función producirá una lista. Por ejemplo,
 descargando también el segundo trimestre de 2011:
 
 ``` r
-descargar.inei(encuesta = "ENAHO", modulo = 37, annos = 2011, tipo = "t2", dirdescarga = tempdir())
+descargar.inei(encuesta = "ENAHO", modulo = 37, periodos = 2011, tipo = "t2", dirdescarga = tempdir())
 ## Descargando 1 archivo.
 ```
 
 Podemos leer ambos trimestres:
 
 ``` r
-leidas <- leer.inei(encuesta = "ENAHO", modulo = 37, annos = 2011, tipo = c("t1","t2"), directorio = tempdir())
+leidas <- leer.inei(encuesta = "ENAHO", modulo = 37, periodos = 2011, tipo = c("t1","t2"), directorio = tempdir())
 ## Leyendo 2 archivos.
 ## Leyendo archivo 1 de 2.
 ## Leyendo archivo 2 de 2.
@@ -192,7 +233,7 @@ Usando `leer.inei.web()` podemos leer las bases directamente desde la
 web, aplicando las mismas reglas que `leer.inei()`:
 
 ``` r
-leer.inei.web(encuesta = "ENAHO", modulo = 37, annos = 2011, tipo = c("t1"))
+leer.inei.web(encuesta = "ENAHO", modulo = 37, periodos = 2011, tipo = c("t1"))
 ## Descargando 1 archivo.
 ## Leyendo 1 archivo.
 ## Leyendo archivo 1 de 1.

@@ -12,7 +12,7 @@
 #'
 #' @examples
 #' directorio = system.file("extdata", package = "enaho")
-#' leer.inei(modulo = 37, annos = 2011, directorio = directorio, tipo = "t1")
+#' leer.inei(modulo = 37, periodos = 2011, directorio = directorio, tipo = "t1")
 #'
 #' @returns un data frame o una lista.
 #'
@@ -21,7 +21,7 @@
 #'
 
 leer.inei <- function(encuesta = "ENAHO",
-                      modulo, annos,
+                      modulo, periodos,
                       directorio = getwd(),
                       tipo = "anual",
                       ensilencio = FALSE,
@@ -37,7 +37,7 @@ leer.inei <- function(encuesta = "ENAHO",
     modulo <- paste0("0",as.numeric(modulo))
   }
 
-  arkobj <- paste0(directorio,"/",encuesta,"_",rep(annos,each = length(tipo)),"_Modulo",modulo,"_",rep(tipo,length(annos)))
+  arkobj <- paste0(directorio,"/",encuesta,"_",rep(periodos,each = length(tipo)),"_Modulo",modulo,"_",rep(tipo,length(periodos)))
 
   arks <- list.dirs(directorio,recursive = FALSE)
   arks <- intersect(arks,arkobj)
@@ -47,7 +47,7 @@ leer.inei <- function(encuesta = "ENAHO",
                 "\nPara evitar sobrecargar la RAM, solo puede cargar hasta 4 bases a la vez.",
                 "\nReduzca la cantidad de bases deseadas."),call. = FALSE)
 
-  arkn <- gsub(paste0(encuesta,"_"),"",gsub("/","",gsub(directorio,"",arks)))
+  arkn <- gsub(paste0(encuesta,"_"),"",basename(arks))
 
   if(!ensilencio){
     cat(paste0("Leyendo ",length(arks)," archivo",

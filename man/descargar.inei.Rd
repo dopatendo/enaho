@@ -7,7 +7,7 @@
 descargar.inei(
   encuesta = "ENAHO",
   modulo,
-  annos,
+  periodos,
   dirdescarga = getwd(),
   tipo = "anual",
   ensilencio = FALSE
@@ -19,7 +19,7 @@ descargar.inei(
 
 \item{modulo}{el código del módulo deseado.}
 
-\item{annos}{los años deseados.}
+\item{periodos}{los años deseados.}
 
 \item{dirdescarga}{el directorio de descarga.}
 
@@ -38,6 +38,6 @@ guarda los archivos descargados en el disco.
 Descarga datos disponibles del portal de Microdatos del INEI.
 }
 \examples{
-descargar.inei(modulo = 37, anno = 2011, dirdescarga = tempdir(), tipo = "t1")
+descargar.inei(modulo = 37, periodos = 2011, dirdescarga = tempdir(), tipo = "t1")
 
 }

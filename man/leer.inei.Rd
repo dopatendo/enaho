@@ -7,7 +7,7 @@
 leer.inei(
   encuesta = "ENAHO",
   modulo,
-  annos,
+  periodos,
   directorio = getwd(),
   tipo = "anual",
   ensilencio = FALSE,
@@ -21,7 +21,7 @@ leer.inei(
 
 \item{modulo}{el código del módulo deseado.}
 
-\item{annos}{los años deseados.}
+\item{periodos}{los años deseados.}
 
 \item{directorio}{el directorio de donde están las carpetas generadas por \code{\link{descargar.inei}}.}
 
@@ -48,6 +48,6 @@ con mayor peso.
 }
 \examples{
 directorio = system.file("extdata", package = "enaho")
-leer.inei(modulo = 37, annos = 2011, directorio = directorio, tipo = "t1")
+leer.inei(modulo = 37, periodos = 2011, directorio = directorio, tipo = "t1")
 
 }
