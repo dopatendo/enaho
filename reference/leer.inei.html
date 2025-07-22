@@ -22,7 +22,6 @@ con mayor peso."></head><body>
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto"><li class="active nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
-<li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json"></form></li>
       </ul></div>
@@ -50,7 +49,7 @@ con mayor peso.</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">leer.inei</span><span class="op">(</span></span>
 <span>  encuesta <span class="op">=</span> <span class="st">"ENAHO"</span>,</span>
 <span>  <span class="va">modulo</span>,</span>
-<span>  <span class="va">annos</span>,</span>
+<span>  <span class="va">periodos</span>,</span>
 <span>  directorio <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/getwd.html" class="external-link">getwd</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  tipo <span class="op">=</span> <span class="st">"anual"</span>,</span>
 <span>  ensilencio <span class="op">=</span> <span class="cn">FALSE</span>,</span>
@@ -72,7 +71,7 @@ con mayor peso.</p>
 <dd><p>el código del módulo deseado.</p></dd>
 
 
-<dt id="arg-annos">annos<a class="anchor" aria-label="anchor" href="#arg-annos"></a></dt>
+<dt id="arg-periodos">periodos<a class="anchor" aria-label="anchor" href="#arg-periodos"></a></dt>
 <dd><p>los años deseados.</p></dd>
 
 
@@ -108,7 +107,7 @@ y <code>"t4"</code> (cuarto trimestre). Las opciones pueden combinarse.</p></dd>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">directorio</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, package <span class="op">=</span> <span class="st">"enaho"</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu">leer.inei</span><span class="op">(</span>modulo <span class="op">=</span> <span class="fl">37</span>, annos <span class="op">=</span> <span class="fl">2011</span>, directorio <span class="op">=</span> <span class="va">directorio</span>, tipo <span class="op">=</span> <span class="st">"t1"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">leer.inei</span><span class="op">(</span>modulo <span class="op">=</span> <span class="fl">37</span>, periodos <span class="op">=</span> <span class="fl">2011</span>, directorio <span class="op">=</span> <span class="va">directorio</span>, tipo <span class="op">=</span> <span class="st">"t1"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Leyendo 1 archivo.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Leyendo archivo 1 de 1.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 4,625 × 24</span></span>
