@@ -31,7 +31,7 @@ El paquete `enaho` permite descargar, leer y combinar bases del Instituto Nacion
 Puede instalar la versión desarrollador de `enaho` usando:
 
 ``` r
-remotes::install_github("dopatendo/ILSAmerge")
+remotes::install_github("dopatendo/enaho")
 ```
 
 ## Identificar bases y módulos disponibles

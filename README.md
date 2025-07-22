@@ -11,7 +11,7 @@ Instituto Nacional de Estadística e Informática (INEI) del Perú.
 Puede instalar la versión desarrollador de `enaho` usando:
 
 ``` r
-remotes::install_github("dopatendo/ILSAmerge")
+remotes::install_github("dopatendo/enaho")
 ```
 
 ## Identificar bases y módulos disponibles
