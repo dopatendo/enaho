@@ -62,7 +62,7 @@ los años que necesite con `annos`; el directorio de descarga con `dirdescarga`;
 Por ejemplo, para descargar el módulo 37 del primer trimestre de 2011 en el directorio temporal:
 
 ```{r }
-descargar.inei(encuesta = "ENAHO", modulo = 37, anno = 2011, dirdescarga = tempdir())
+descargar.inei(encuesta = "ENAHO", modulo = 37, anno = 2011, tipo = "t1", dirdescarga = tempdir())
 ```
 
 Note que una carpeta se habrá creado en el directorio:
@@ -72,6 +72,32 @@ list.files(tempdir(),pattern = "enaho")
 
 Dentro de esta carpeta se habrán descomprimido todos los archivos relacionados a ese período y módulo:
 ```{r }
-list.files(file.path(tempdir(),"enaho_2011_Modulo37_anual"))
+list.files(file.path(tempdir(),"enaho_2011_Modulo37_t1"))
+```
+
+## Leer bases descargadas y combinarlas
+
+Las bases descargads con `descargar.inei()` pueden ser leídas con `leer.inei()`. El módulo y los períodos deben ser especificados. Si más de una base es leída, la función producirá una lista. Por ejemplo, descargando también el segundo trimestre de 2011:
+
+```{r }
+descargar.inei(encuesta = "ENAHO", modulo = 37, annos = 2011, tipo = "t2", dirdescarga = tempdir())
+```
+
+Podemos leer ambos trimestres:
+```{r }
+leidas <- leer.inei(encuesta = "ENAHO", modulo = 37, annos = 2011, tipo = c("t1","t2"), directorio = tempdir())
+leidas
+```
+
+Y, usando `combinar.inei()` (o el argumento `combinar` en `leer.inei`) podemos combinar ambos trimestres. También podemos especificar si sólo queremos combinar las variables comunes o todas las variables:
+```{r }
+combinar.inei(x = leidas, solocomunes = FALSE)
+```
+
+## Leer bases directamente desde la web
+
+Usando `leer.inei.web()` podemos leer las bases directamente desde la web, aplicando las mismas reglas que `leer.inei()`:
+```{r }
+leer.inei.web(encuesta = "ENAHO", modulo = 37, annos = 2011, tipo = c("t1"))
 ```
 

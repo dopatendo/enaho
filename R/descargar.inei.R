@@ -8,6 +8,7 @@
 #' @param annos los años deseados.
 #' @param dirdescarga el directorio de descarga.
 #' @param tipo el tipo de período deseado. Las opciones son \code{"anual"},
+#'   \code{"t1"} (primer trimestre),
 #'   \code{"t2"} (segundo trimestre),
 #'   \code{"t3"} (tercer trimestre),
 #' y \code{"t4"} (cuarto trimestre). Las opciones pueden combinarse.
@@ -15,7 +16,7 @@
 # @param descomprimir un valor lógico que indica si la descarga debe ser descomprimida.
 #'
 #' @examples
-##' descargar.inei(modulo = 37, anno = 2011, dirdescarga = tempdir())
+##' descargar.inei(modulo = 37, anno = 2011, dirdescarga = tempdir(), tipo = "t1")
 #'
 #' @returns guarda los archivos descargados en el disco.
 #'
@@ -35,6 +36,7 @@ descargar.inei <- function(encuesta = "ENAHO",
   on.exit(options(timeout = tmis))
 
   encuesta <- tolower(encuesta)
+  tipo <- tolower(tipo)
 
   fixurl <- "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/SPSS"
 

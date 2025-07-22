@@ -1,19 +1,20 @@
 Package: enaho
 Type: Package
-Title: What the Package Does (Title Case)
-Version: 0.1.0
-Authors@R: person(given = "Andrés",
+Title: Encuesta Nacional de Hogares (Peruvian Home National Survey)
+Version: 0.2.0
+Authors@R: c(person(given = "Andrés",
                     family = "Christiansen",
                     role = c("aut", "cre"),
-                    email = "andres.christiansen@iea-hamburg.de")
+                    email = "andres.christiansen@iea-hamburg.de",
+                    comment = c(ORCID = "0000-0003-2692-7843")))
 Maintainer: Andrés Christiansen <andres.christiansen@iea-hamburg.de>
-Description: More about what it does (maybe more than one line).
-    Continuation lines should be indented.
+Description: Descargar, lee y combina bases de la Encuesta Nacional de Hogares (ENAHO) del Instituto Nacional de Estadística e Informática (INEI) del Perú. (Downloads, reads, and combines data from the Peruvian Home National Survey.)
 License: GPL (>= 2.0)
 Encoding: UTF-8
 Language: es
 LazyData: true
 RoxygenNote: 7.3.2
 Depends: 
-    R (>= 4.2)
+    R (>= 3.5)
+Imports: haven, tibble
 URL: https://dopatendo.github.io/enaho/
