@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">enaho</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -16,6 +16,7 @@
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto"><li class="active nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
+<li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json"></form></li>
       </ul></div>
@@ -70,6 +71,7 @@
 
 <dt id="arg-tipo">tipo<a class="anchor" aria-label="anchor" href="#arg-tipo"></a></dt>
 <dd><p>el tipo de período deseado. Las opciones son <code>"anual"</code>,
+  <code>"t1"</code> (primer trimestre),
   <code>"t2"</code> (segundo trimestre),
   <code>"t3"</code> (tercer trimestre),
 y <code>"t4"</code> (cuarto trimestre). Las opciones pueden combinarse.</p></dd>
@@ -86,7 +88,7 @@ y <code>"t4"</code> (cuarto trimestre). Las opciones pueden combinarse.</p></dd>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">descargar.inei</span><span class="op">(</span>modulo <span class="op">=</span> <span class="fl">37</span>, anno <span class="op">=</span> <span class="fl">2011</span>, dirdescarga <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">descargar.inei</span><span class="op">(</span>modulo <span class="op">=</span> <span class="fl">37</span>, anno <span class="op">=</span> <span class="fl">2011</span>, dirdescarga <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>, tipo <span class="op">=</span> <span class="st">"t1"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Descargando 1 archivo.</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
