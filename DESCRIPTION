@@ -8,7 +8,7 @@ Authors@R: c(person(given = "Andrés",
                     email = "andres.christiansen@iea-hamburg.de",
                     comment = c(ORCID = "0000-0003-2692-7843")))
 Maintainer: Andrés Christiansen <andres.christiansen@iea-hamburg.de>
-Description: Descargar, lee y combina bases de la Encuesta Nacional de Hogares (ENAHO) del Instituto Nacional de Estadística e Informática (INEI) del Perú. (Downloads, reads, and combines data from the Peruvian Home National Survey.)
+Description: Descarga, lee y combina bases de la Encuesta Nacional de Hogares (ENAHO) del Instituto Nacional de Estadística e Informática (INEI) del Perú. (Downloads, reads, and combines data from the Peruvian Home National Survey.)
 License: GPL (>= 2.0)
 Encoding: UTF-8
 Language: es
