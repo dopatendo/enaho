@@ -1,7 +1,7 @@
 Package: enaho
 Type: Package
 Title: Encuesta Nacional de Hogares (Peruvian Home National Survey)
-Version: 0.2.1
+Version: 0.2.0
 Authors@R: c(person(given = "Andrés",
                     family = "Christiansen",
                     role = c("aut", "cre"),
