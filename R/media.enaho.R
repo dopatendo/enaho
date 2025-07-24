@@ -19,15 +19,15 @@
 #'
 #'
 media.enaho <- function(x,
-                             base,
-                             estratos = NULL,
-                             combinarestratos = FALSE,
-                             dividirperiodos = FALSE,
-                             ruralidad = 6:8,
-                             pesos = "FACTOR07",
-                             var = c("insesgado"),
-                             decimales = NULL,
-                             formatolargo = FALSE){
+                        base,
+                        estratos = NULL,
+                        combinarestratos = FALSE,
+                        dividirperiodos = FALSE,
+                        ruralidad = 6:8,
+                        pesos = "FACTOR07",
+                        var = c("insesgado"),
+                        decimales = NULL,
+                        formatolargo = FALSE){
 
 
   if(var=="insesgado"){
@@ -45,15 +45,15 @@ media.enaho <- function(x,
   out <- vector("list",length(x))
   for(i in 1:length(x)){
     out[[i]] <-   .media.enaho(x = x[i],
-                                    base = base,
-                                    estratos = estratos,
-                                    combinarestratos = combinarestratos,
-                                    dividirperiodos = dividirperiodos,
-                                    ruralidad = ruralidad,
-                                    pesos = pesos,
-                                    porcentaje = porcentaje,
-                                    decimales = decimales,
-                                    formatolargo = formatolargo)
+                               base = base,
+                               estratos = estratos,
+                               combinarestratos = combinarestratos,
+                               dividirperiodos = dividirperiodos,
+                               ruralidad = ruralidad,
+                               pesos = pesos,
+                               mod = mod,
+                               decimales = decimales,
+                               formatolargo = formatolargo)
   }
 
   if(length(x)==1)
@@ -69,15 +69,15 @@ media.enaho <- function(x,
 }
 
 .media.enaho <- function(x,
-                              base,
-                              estratos = NULL,
-                              combinarestratos = FALSE,
-                              dividirperiodos = FALSE,
-                              ruralidad = 6:8,
-                              pesos = "FACTOR07",
-                              porcentaje = FALSE,
-                              decimales = NULL,
-                              formatolargo = FALSE){
+                         base,
+                         estratos = NULL,
+                         combinarestratos = FALSE,
+                         dividirperiodos = FALSE,
+                         ruralidad = 6:8,
+                         pesos = "FACTOR07",
+                         mod = mod,
+                         decimales = NULL,
+                         formatolargo = FALSE){
 
 
 
@@ -243,10 +243,10 @@ media.enaho <- function(x,
           }
           names(outj) <- unestratos[[i]]
           outj <- cbind.data.frame(Periodo = uper[k],
-                                    Estrato = names(nestratos)[i],
-                                    Nombre = unestratos[[i]],
-                                    Variable = x,
-                                    Media = unlist(outj),
+                                   Estrato = names(nestratos)[i],
+                                   Nombre = unestratos[[i]],
+                                   Variable = x,
+                                   Media = unlist(outj),
                                    DE = sqrt(unlist(outjV)),
                                    Varianza = unlist(outjV))
           colnames(outj)[1] <- .tildes("peri")
@@ -257,7 +257,7 @@ media.enaho <- function(x,
 
         ##?????
         # if(!formatolargo){
-          outk[[k]] <- outi
+        outk[[k]] <- outi
         # }else{
         #   novan <- c(.tildes("peri"),"Estrato", "Nombre","Variable")
         #   outi <- reshape(outi,

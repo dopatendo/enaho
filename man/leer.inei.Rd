@@ -37,6 +37,8 @@ y \code{"t4"} (cuarto trimestre). Las opciones pueden combinarse.}
 \item{combinar}{un valor lógico que indica si las bases deben ser combinadas en un único data frame.}
 
 \item{solocomunes}{un valor lógico que indica si sólo deben combinarse las columnas comunes.}
+
+\item{columnas}{una cadena de texto que indica qué columnas seleccionar.}
 }
 \value{
 un data frame o una lista.

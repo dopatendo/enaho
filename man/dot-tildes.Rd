@@ -6,6 +6,9 @@
 \usage{
 .tildes(x)
 }
+\arguments{
+\item{x}{un nombre.}
+}
 \description{
 Internal functions
 }

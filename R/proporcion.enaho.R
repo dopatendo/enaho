@@ -270,7 +270,7 @@ proporcion.enaho <- function(x,
           outk[[k]] <- outi
         }else{
           novan <- c(.tildes("peri"),"Estrato", "Nombre","Variable")
-          outi <- reshape(outi,
+          outi <- stats::reshape(outi,
                           idvar = novan,
                           varying = list(names(outi)[!names(outi) %in% novan]),
                           direction = "long",

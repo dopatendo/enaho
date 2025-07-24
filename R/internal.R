@@ -1,15 +1,22 @@
 #' Internal functions
 #'
+#' @param x un nombre.
 
 
 # Castellano --------------------------------------------------------------
 
 .tildes <- function(x){
-  li <- list(prop = "Proporción",
-             cate = "Categoría",
-             peri = "Período",
-             area = "Área",
-             regi = "Región")
+
+  cs <- file.path(system.file("extdata", package = "enaho"),"tildes.csv")
+  cs <- utils::read.csv2(cs)
+  li <- as.list(cs$tilde)
+  names(li) <- cs$nom
+
+  # li <- list(prop = "Proporción",
+  #            cate = "Categoría",
+  #            peri = "Período",
+  #            area = "Área",
+  #            regi = "Región")
 
   li[[x]]
 
@@ -44,13 +51,15 @@
 
 .regiones <- function(base,conunicos = TRUE){
 
-  csv <- "/Users/andreschristiansen/RandA Dropbox/Andrés Christiansen/khipuverse/enaho/ztools/UBIGEOS_2022_1891_distritos.csv"
-  csv <- read.csv2(csv,colClasses = "character")
+  csv <- file.path(system.file("extdata", package = "enaho"),"UBIGEOS_2022_1891_distritos.csv")
+
+  # csv <- "/Users/andreschristiansen/RandA Dropbox/Andrés Christiansen/khipuverse/enaho/ztools/UBIGEOS_2022_1891_distritos.csv"
+  csv <- utils::read.csv2(csv,colClasses = "character")
   csv <- csv[,1:2]
   csv$IDDIST <- substr(csv$IDDIST,1,2)
   csv <- (unique(csv))
 
-  ubi <- substr(ILSAmerge::untibble(base[,"UBIGEO"])[,1],1,2)
+  ubi <- substr(untibble(base[,"UBIGEO"])[,1],1,2)
   ubi <- csv$NOMBDEP[match(ubi,csv$IDDIST)]
 
   if(!conunicos)
@@ -61,7 +70,7 @@
 
 
 .ruralidad <- function(base, ruralidad = 6:8){
-  rur <- ILSAmerge::untibble(base[,"ESTRATO"])[,1]
+  rur <- untibble(base[,"ESTRATO"])[,1]
   vec <- rep("Urbana",length(rur))
   vec[rur%in%ruralidad] <- "Rural"
 

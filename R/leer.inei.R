@@ -9,6 +9,7 @@
 #' @param directorio el directorio de donde están las carpetas generadas por \code{\link{descargar.inei}}.
 #' @param combinar un valor lógico que indica si las bases deben ser combinadas en un único data frame.
 #' @param solocomunes un valor lógico que indica si sólo deben combinarse las columnas comunes.
+#' @param columnas una cadena de texto que indica qué columnas seleccionar.
 #'
 #' @examples
 #' directorio = system.file("extdata", package = "enaho")
