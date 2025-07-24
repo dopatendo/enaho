@@ -12,7 +12,8 @@ leer.inei(
   tipo = "anual",
   ensilencio = FALSE,
   combinar = FALSE,
-  solocomunes = FALSE
+  solocomunes = FALSE,
+  columnas = NULL
 )
 }
 \arguments{

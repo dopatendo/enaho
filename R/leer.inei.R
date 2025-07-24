@@ -26,7 +26,33 @@ leer.inei <- function(encuesta = "ENAHO",
                       tipo = "anual",
                       ensilencio = FALSE,
                       combinar = FALSE,
-                      solocomunes = FALSE){
+                      solocomunes = FALSE,
+                      columnas = NULL){
+
+.leer.inei(encuesta = encuesta,
+           modulo = modulo,
+           periodos = periodos,
+           directorio = directorio,
+           tipo = tipo,
+           ensilencio = ensilencio,
+           combinar = combinar,
+           solocomunes = solocomunes,
+           soloatributos = FALSE,
+           col_select = columnas)
+
+
+}
+
+
+.leer.inei <- function(encuesta = "ENAHO",
+                      modulo, periodos,
+                      directorio = getwd(),
+                      tipo = "anual",
+                      ensilencio = TRUE,
+                      combinar = FALSE,
+                      solocomunes = TRUE,
+                      soloatributos = FALSE,
+                      col_select = NULL){
 
 
 
@@ -42,10 +68,10 @@ leer.inei <- function(encuesta = "ENAHO",
   arks <- list.dirs(directorio,recursive = FALSE)
   arks <- intersect(arks,arkobj)
 
-  if(length(arks)>4)
-    stop(paste0(paste0("\n",length(arks)," bases encontradas."),
-                "\nPara evitar sobrecargar la RAM, solo puede cargar hasta 4 bases a la vez.",
-                "\nReduzca la cantidad de bases deseadas."),call. = FALSE)
+  # if(length(arks)>4)
+  #   warning(paste0(paste0("\n",length(arks)," bases encontradas."),
+  #               "\nPara evitar sobrecargar la RAM, se recomienda no cargar hasta 4 bases a la vez.",
+  #               "\nReduzca la cantidad de bases deseadas."),call. = FALSE)
 
   arkn <- gsub(paste0(encuesta,"_"),"",basename(arks))
 
@@ -56,7 +82,10 @@ leer.inei <- function(encuesta = "ENAHO",
 
 
 
-    out <- .leer(arks = arks, arkn = arkn,ensilencio = ensilencio)
+  out <- .leer(arks = arks, arkn = arkn,
+               ensilencio = ensilencio,
+               n_max = ifelse(soloatributos,0,Inf),
+               col_select = col_select)
 
   if(length(out)==1)
     return(out[[1]])
@@ -72,35 +101,59 @@ leer.inei <- function(encuesta = "ENAHO",
 
 
 # funcion de lectura de una base
-.leerspss <- function(x, n_max = Inf){
+.leerspss <- function(x, n_max = Inf, col_select = NULL){
 
   requireNamespace("haven", quietly = TRUE)
 
-  out <- try(haven::read_spss(file = x,
-                              user_na = TRUE,
-                              col_select = NULL,
-                              skip = 0,
-                              n_max = n_max,
-                              .name_repair = "unique"),
-             silent = TRUE)
+  if(is.null(col_select)){
+    out <- try(haven::read_spss(file = x,
+                                user_na = TRUE,
+                                col_select = NULL,
+                                skip = 0,
+                                n_max = n_max,
+                                .name_repair = "unique"),
+               silent = TRUE)
 
-  if("try-error"%in%class(out)){
-    out <- haven::read_sav(file = x,
-                           user_na = TRUE,
-                           col_select = NULL,
-                           skip = 0,
-                           n_max = n_max,
-                           .name_repair = "unique",
-                           encoding = "latin1")
+    if("try-error"%in%class(out)){
+      out <- haven::read_sav(file = x,
+                             user_na = TRUE,
+                             col_select = NULL,
+                             skip = 0,
+                             n_max = n_max,
+                             .name_repair = "unique",
+                             encoding = "latin1")
+    }
+
+    return(out)
+  }else{
+    out <- try(haven::read_spss(file = x,
+                                user_na = TRUE,
+                                col_select = col_select,
+                                skip = 0,
+                                n_max = n_max,
+                                .name_repair = "unique"),
+               silent = TRUE)
+
+    if("try-error"%in%class(out)){
+      out <- haven::read_sav(file = x,
+                             user_na = TRUE,
+                             col_select = col_select,
+                             skip = 0,
+                             n_max = n_max,
+                             .name_repair = "unique",
+                             encoding = "latin1")
+    }
+
+    return(out)
   }
 
-  return(out)
+
 
 
 }
 
 # funcion de lectura de multiples bases
-.leer <- function(arks, arkn, ensilencio = FALSE){
+.leer <- function(arks, arkn, ensilencio = FALSE, n_max = Inf, col_select = NULL){
 
   lei <- vector("list",length = length(arks))
 
@@ -115,7 +168,7 @@ leer.inei <- function(encuesta = "ENAHO",
                  length(arks),".\n"))
     }
 
-    lei[[i]] <- .leerspss(arki)
+    lei[[i]] <- .leerspss(arki,n_max = n_max, col_select = col_select)
   }
 
   names(lei) <- arkn
