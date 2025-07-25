@@ -22,7 +22,7 @@ leer.inei.web <- function(encuesta = "ENAHO",
                           tipo = "anual",
                           ensilencio = FALSE,
                           combinar = FALSE,
-                          solocomunes = FALSE){
+                          combinarsolocomunes = FALSE){
 
 
 
@@ -65,6 +65,6 @@ leer.inei.web <- function(encuesta = "ENAHO",
   if(!combinar)
     return(out)
 
-  return(combinar.inei(out,solocomunes = solocomunes))
+  return(combinar.inei(out,combinarsolocomunes = combinarsolocomunes))
 
 }

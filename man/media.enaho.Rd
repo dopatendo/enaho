@@ -11,7 +11,7 @@ media.enaho(
   combinarestratos = FALSE,
   dividirperiodos = FALSE,
   ruralidad = 6:8,
-  pesos = "FACTOR07",
+  pesos = NULL,
   var = c("insesgado"),
   decimales = NULL
 )

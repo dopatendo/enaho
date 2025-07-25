@@ -8,8 +8,9 @@
 #' @inheritParams descargar.inei
 #' @param directorio el directorio de donde están las carpetas generadas por \code{\link{descargar.inei}}.
 #' @param combinar un valor lógico que indica si las bases deben ser combinadas en un único data frame.
-#' @param solocomunes un valor lógico que indica si sólo deben combinarse las columnas comunes.
+#' @param combinarsolocomunes un valor lógico que indica si sólo deben combinarse las columnas comunes.
 #' @param columnas una cadena de texto que indica qué columnas seleccionar.
+#' @param solocomunes un valor lógico que indica si sólo deben leerse las columnas comunes.
 #'
 #' @examples
 #' directorio = system.file("extdata", package = "enaho")
@@ -25,10 +26,35 @@ leer.inei <- function(encuesta = "ENAHO",
                       modulo, periodos,
                       directorio = getwd(),
                       tipo = "anual",
+                      columnas = NULL,
+                      solocomunes = FALSE,
                       ensilencio = FALSE,
                       combinar = FALSE,
-                      solocomunes = FALSE,
-                      columnas = NULL){
+                      combinarsolocomunes = FALSE
+                      ){
+
+
+
+
+
+  if(solocomunes){
+
+    vxp <- variablesxperiodo(encuesta = encuesta,
+                             modulo = modulo,
+                             periodos = periodos,
+                             directorio = directorio,
+                             tipo = tipo)
+
+    vxp <- vxp[rowSums(vxp[,-1],na.rm = TRUE)==(ncol(vxp)-1),1]
+
+    if(is.null(columnas)){
+      columnas <- vxp
+    }else{
+      columnas <- intersect(vxp,columnas)
+    }
+
+
+  }
 
 .leer.inei(encuesta = encuesta,
            modulo = modulo,
@@ -37,9 +63,10 @@ leer.inei <- function(encuesta = "ENAHO",
            tipo = tipo,
            ensilencio = ensilencio,
            combinar = combinar,
-           solocomunes = solocomunes,
+           combinarsolocomunes = combinarsolocomunes,
            soloatributos = FALSE,
-           col_select = columnas)
+           col_select = columnas,
+           unlist = TRUE)
 
 
 }
@@ -51,9 +78,10 @@ leer.inei <- function(encuesta = "ENAHO",
                       tipo = "anual",
                       ensilencio = TRUE,
                       combinar = FALSE,
-                      solocomunes = TRUE,
+                      combinarsolocomunes = TRUE,
                       soloatributos = FALSE,
-                      col_select = NULL){
+                      col_select = NULL,
+                      unlist = TRUE){
 
 
 
@@ -89,12 +117,17 @@ leer.inei <- function(encuesta = "ENAHO",
                col_select = col_select)
 
   if(length(out)==1)
-    return(out[[1]])
+    if(unlist){
+      return(out[[1]])
+    }else{
+      return(out)
+    }
+
 
   if(!combinar)
     return(out)
 
-  return(combinar.inei(out,solocomunes = solocomunes))
+  return(combinar.inei(out,combinarsolocomunes = combinarsolocomunes))
 
 
 
@@ -127,23 +160,46 @@ leer.inei <- function(encuesta = "ENAHO",
 
     return(out)
   }else{
+    # outn <- try(haven::read_spss(file = x,
+    #                             user_na = TRUE,
+    #                             col_select = NULL,
+    #                             skip = 0,
+    #                             n_max = 0,
+    #                             .name_repair = "unique"),
+    #            silent = TRUE)
+    #
+    # if("try-error"%in%class(outn)){
+    #   outn <- haven::read_sav(file = x,
+    #                          user_na = TRUE,
+    #                          col_select = NULL,
+    #                          skip = 0,
+    #                          n_max = 0,
+    #                          .name_repair = "unique",
+    #                          encoding = "latin1")
+    # }
+    #
+    # coll <- intersect(col_select,colnames(outn))
+
+
+
     out <- try(haven::read_spss(file = x,
-                                user_na = TRUE,
-                                col_select = col_select,
-                                skip = 0,
-                                n_max = n_max,
-                                .name_repair = "unique"),
-               silent = TRUE)
+                                 user_na = TRUE,
+                                 col_select = any_of(col_select),
+                                 skip = 0,
+                                 n_max = n_max,
+                                 .name_repair = "unique"),
+                silent = TRUE)
 
     if("try-error"%in%class(out)){
       out <- haven::read_sav(file = x,
-                             user_na = TRUE,
-                             col_select = col_select,
-                             skip = 0,
-                             n_max = n_max,
-                             .name_repair = "unique",
-                             encoding = "latin1")
+                              user_na = TRUE,
+                              col_select = any_of(col_select),
+                              skip = 0,
+                              n_max = n_max,
+                              .name_repair = "unique",
+                              encoding = "latin1")
     }
+
 
     return(out)
   }
@@ -178,3 +234,5 @@ leer.inei <- function(encuesta = "ENAHO",
 
 
 }
+
+

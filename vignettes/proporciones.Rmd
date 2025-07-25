@@ -1,5 +1,5 @@
 ---
-title: "Proporciones"
+title: "04 - Proporciones"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{proporciones}

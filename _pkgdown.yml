@@ -6,6 +6,8 @@ articles:
 - title: Articles
   navbar: ~
   contents:
+  - descargar
+  - leer
   - medias
   - proporciones
 

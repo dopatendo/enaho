@@ -35,7 +35,10 @@ variablesxperiodo <- function(encuesta = "ENAHO",
                     directorio = directorio,
                     tipo = tipo,
                     soloatributos = TRUE,
-                    ensilencio = TRUE)
+                    ensilencio = TRUE,
+                    unlist = FALSE)
+
+
 
   lna <- lapply(blei,colnames)
   ulna <- unique(unlist(lna))

@@ -1,0 +1,66 @@
+---
+title: "02 - Leer bases"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Leer bases}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(enaho)
+```
+
+## Leer bases descargadas y combinarlas
+
+Las bases descargads con `descargar.inei()` pueden ser leídas con `leer.inei()`. El módulo y los períodos deben ser especificados. Si más de una base es leída, la función producirá una lista. Por ejemplo, si tenemos descargados los primeros dos trimestres de 2011 en una carpeta, podemos leer ambos trimestres:
+
+
+```{r }
+dir <- system.file("extdata", package = "enaho")
+leido <- leer.inei(encuesta = "ENAHO", modulo = 37, periodos = 2011, tipo = c("t1","t2"), directorio = dir)
+leido
+```
+
+Y, usando `combinar.inei()` (o el argumento `combinar` en `leer.inei`) podemos combinar ambos trimestres. También podemos especificar si sólo queremos combinar las variables comunes o todas las variables:
+```{r }
+combinar.inei(x = leido, combinarsolocomunes = FALSE)
+```
+
+## Leer bases directamente desde la web
+
+Usando `leer.inei.web()` podemos leer las bases directamente desde la web, aplicando las mismas reglas que `leer.inei()`:
+```{r }
+leer.inei.web(encuesta = "ENAHO", modulo = 37, periodos = 2011, tipo = c("t1"))
+```
+
+
+## Leer sólo algunas variables
+
+Debido a que las bases pueden ser muy grandes **se recomienda sólo leer las variables requeridas**. Para eso podemos usar `variablesxperiodo()` que nos indicará qué variables están presentes en cada período:
+
+```{r}
+variablesxperiodo(modulo = 37, periodos = c(2011,2024),directorio = dir,tipo = "t1")
+```
+
+Así podemos saber qué variables están disponibles y sólo leer las que necesitamos con `leer.inei()` pero no con `leer.inei.web()`:
+
+```{r}
+vars <- c("AÑO","UBIGEO","DOMINIO","ESTRATO","P702","FACTRIM","FACTOR")
+leer.inei(modulo = 37, periodos = c(2011,2024),directorio = dir,tipo = "t1",columnas = vars)
+```
+
+También podemos leer sólo las variables comunes con `solocomunes = TRUE`. Sin embargo, podría haber variables importantes (como los pesos) que cambien de nombre entre períodos:
+
+
+```{r}
+leer.inei(modulo = 37, periodos = c(2011,2024),directorio = dir,tipo = "t1",solocomunes = TRUE)
+```
+

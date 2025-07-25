@@ -4,12 +4,12 @@
 \alias{combinar.inei}
 \title{Combinar bases de la ENAHO}
 \usage{
-combinar.inei(x, solocomunes = FALSE)
+combinar.inei(x, combinarsolocomunes = FALSE)
 }
 \arguments{
 \item{x}{una lista de bases leídas con \code{\link{leer.inei}}.}
 
-\item{solocomunes}{un valor lógico que indica si sólo deben combinarse las columnas comunes.}
+\item{combinarsolocomunes}{un valor lógico que indica si sólo deben combinarse las columnas comunes.}
 }
 \value{
 un data frame.

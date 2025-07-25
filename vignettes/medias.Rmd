@@ -1,5 +1,5 @@
 ---
-title: "Medidas de tendencia central"
+title: "03 - Medidas de tendencia central"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{medias}

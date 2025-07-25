@@ -17,10 +17,10 @@
 #'
 #'
 
-combinar.inei <- function(x, solocomunes = FALSE){
+combinar.inei <- function(x, combinarsolocomunes = FALSE){
 
 
-  out <- try(.combinar.inei(x = x, solocomunes = solocomunes),silent = TRUE)
+  out <- try(.combinar.inei(x = x, combinarsolocomunes = combinarsolocomunes),silent = TRUE)
 
   if(!inherits(out,"try-error"))
     return(out)
@@ -32,7 +32,7 @@ combinar.inei <- function(x, solocomunes = FALSE){
 
 }
 
-.combinar.inei <- function(x, solocomunes = FALSE){
+.combinar.inei <- function(x, combinarsolocomunes = FALSE){
 
   cln <- lapply(x,colnames)
   ucln <- unique(unlist(cln))
@@ -42,7 +42,7 @@ combinar.inei <- function(x, solocomunes = FALSE){
   notinall <- setdiff(ucln,tt[tt[,2]==length(x),1])
   inall <- do.call(rbind,lapply(x,function(i){i[,inall]}))
 
-  if(solocomunes)
+  if(combinarsolocomunes)
     return(inall)
 
 

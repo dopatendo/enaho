@@ -10,10 +10,11 @@ leer.inei(
   periodos,
   directorio = getwd(),
   tipo = "anual",
+  columnas = NULL,
+  solocomunes = FALSE,
   ensilencio = FALSE,
   combinar = FALSE,
-  solocomunes = FALSE,
-  columnas = NULL
+  combinarsolocomunes = FALSE
 )
 }
 \arguments{
@@ -32,13 +33,15 @@ leer.inei(
   \code{"t3"} (tercer trimestre),
 y \code{"t4"} (cuarto trimestre). Las opciones pueden combinarse.}
 
+\item{columnas}{una cadena de texto que indica qué columnas seleccionar.}
+
+\item{solocomunes}{un valor lógico que indica si sólo deben leerse las columnas comunes.}
+
 \item{ensilencio}{un valor lógico que indica si el progreso de la función debe ser omitido.}
 
 \item{combinar}{un valor lógico que indica si las bases deben ser combinadas en un único data frame.}
 
-\item{solocomunes}{un valor lógico que indica si sólo deben combinarse las columnas comunes.}
-
-\item{columnas}{una cadena de texto que indica qué columnas seleccionar.}
+\item{combinarsolocomunes}{un valor lógico que indica si sólo deben combinarse las columnas comunes.}
 }
 \value{
 un data frame o una lista.
