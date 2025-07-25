@@ -1,4 +1,5 @@
 # enaho 0.2.5
+* Added `"ENDES"`.
 * Added `media.enaho()`.
 * Added `proporcion.enaho()`.
 * Added `variablesxperiodo()`.
