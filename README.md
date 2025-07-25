@@ -3,8 +3,11 @@
 
 # enaho
 
-El paquete `enaho` permite descargar, leer y combinar bases del
+El paquete `enaho` permite descargar, leer y analizar bases del
 Instituto Nacional de Estadística e Informática (INEI) del Perú.
+Actualmente permite trabajar con bases de la Encuesta Nacional de
+Hogares (ENAHO), la ENAHO panel y la Encuesta Demográfica y de Salud
+Familiar (ENDES).
 
 <!-- badges: start -->
 

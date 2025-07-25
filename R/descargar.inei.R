@@ -3,7 +3,7 @@
 #' Descarga datos disponibles del portal de Microdatos del INEI.
 #'
 #' @param encuesta el nombre de una encuesta del INEI. Las opciones dispobibles son
-#' \code{"ENAHO"} y \code{"ENAHOpanel"}. No importa si está escrito en mayúscula o minúscula.
+#' \code{"ENAHO"}, \code{"ENAHOpanel"} y \code{"ENDES"}. No importa si está escrito en mayúscula o minúscula.
 #' @param modulo el código del módulo deseado.
 #' @param periodos los años deseados.
 #' @param dirdescarga el directorio de descarga.
