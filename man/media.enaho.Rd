@@ -13,8 +13,7 @@ media.enaho(
   ruralidad = 6:8,
   pesos = "FACTOR07",
   var = c("insesgado"),
-  decimales = NULL,
-  formatolargo = FALSE
+  decimales = NULL
 )
 }
 \arguments{
@@ -36,7 +35,7 @@ cada región.}
 \item{ruralidad}{un vector numérico que indica que valores de la variable \code{"ESTRATO"} deben ser considerados
 rurales. Usualmente del 6 al 8.}
 
-\item{pesos}{una cadena de caracteres con el nombre de la variable que representa los pesos.
+\item{pesos}{una cadena de caracteres con el nombre de la(s) variable(s) que representan los pesos.
 Si es \code{NULL} las proporciones se estiman sin pesarlas.}
 
 \item{var}{una cadena de texto que indica el método a usar para la varianza:
@@ -44,9 +43,6 @@ Si es \code{NULL} las proporciones se estiman sin pesarlas.}
 \code{"MV"} calcula la estimación de máxima verosimilitud.}
 
 \item{decimales}{un valor numérico que indica cuántos decimales se necesitan. Si es \code{NULL} no se redondea.}
-
-\item{formatolargo}{un valor lógico que indica si los resultados debes estar en formato largo.
-Si se incluye más de una variable, se darán los resultados en formato largo.}
 }
 \value{
 un data frame o una lista.

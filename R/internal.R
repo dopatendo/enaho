@@ -1,6 +1,7 @@
 #' Internal functions
 #'
 #' @param x un nombre.
+#' @noRd
 
 
 # Castellano --------------------------------------------------------------

@@ -11,7 +11,7 @@ proporcion.enaho(
   combinarestratos = FALSE,
   dividirperiodos = FALSE,
   ruralidad = 6:8,
-  pesos = "FACTOR07",
+  pesos = NULL,
   forzaretiquetas = FALSE,
   porcentaje = FALSE,
   decimales = NULL,
@@ -37,7 +37,7 @@ cada región.}
 \item{ruralidad}{un vector numérico que indica que valores de la variable \code{"ESTRATO"} deben ser considerados
 rurales. Usualmente del 6 al 8.}
 
-\item{pesos}{una cadena de caracteres con el nombre de la variable que representa los pesos.
+\item{pesos}{una cadena de caracteres con el nombre de la(s) variable(s) que representan los pesos.
 Si es \code{NULL} las proporciones se estiman sin pesarlas.}
 
 \item{forzaretiquetas}{un valor lógico que indica si las etiquetas del período con más etiquetas deben

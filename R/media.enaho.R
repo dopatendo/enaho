@@ -26,8 +26,7 @@ media.enaho <- function(x,
                         ruralidad = 6:8,
                         pesos = "FACTOR07",
                         var = c("insesgado"),
-                        decimales = NULL,
-                        formatolargo = FALSE){
+                        decimales = NULL){
 
 
   if(var=="insesgado"){
@@ -38,9 +37,7 @@ media.enaho <- function(x,
   }
 
 
-  if(length(x)>1){
-    formatolargo = TRUE
-  }
+
 
   out <- vector("list",length(x))
   for(i in 1:length(x)){
@@ -52,8 +49,7 @@ media.enaho <- function(x,
                                ruralidad = ruralidad,
                                pesos = pesos,
                                mod = mod,
-                               decimales = decimales,
-                               formatolargo = formatolargo)
+                               decimales = decimales)
   }
 
   if(length(x)==1)
@@ -76,8 +72,7 @@ media.enaho <- function(x,
                          ruralidad = 6:8,
                          pesos = "FACTOR07",
                          mod = mod,
-                         decimales = NULL,
-                         formatolargo = FALSE){
+                         decimales = NULL){
 
 
 
@@ -97,6 +92,10 @@ media.enaho <- function(x,
 
   outk <- vector("list",length(uper))
   if(length(uper)==1){dividirperiodos <- FALSE}
+
+  if(length(pesos)==1){
+    pesos <- rep(pesos,length(uper))
+  }
 
   for(k in 1:length(uper)){
 
@@ -176,11 +175,12 @@ media.enaho <- function(x,
 
 
         xx <- as.numeric(untibble(basek[,x])[,1])
+        pesok <- pesos[k]
 
-        if(is.null(pesos)){
+        if(is.null(pesok)){
           pp <- rep(1,nrow(basek))
         }else{
-          pp <- untibble(basek[,pesos])[,1]
+          pp <- untibble(basek[,pesok])[,1]
         }
 
 
@@ -255,21 +255,9 @@ media.enaho <- function(x,
         }
         outi <- do.call(rbind,outi)
 
-        ##?????
-        # if(!formatolargo){
+
         outk[[k]] <- outi
-        # }else{
-        #   novan <- c(.tildes("peri"),"Estrato", "Nombre","Variable")
-        #   outi <- reshape(outi,
-        #                   idvar = novan,
-        #                   varying = list(names(outi)[!names(outi) %in% novan]),
-        #                   direction = "long",
-        #                   timevar = .tildes("cate"),
-        #                   times = names(outi)[!names(outi) %in% novan],
-        #                   v.names = .tildes("prop"))
-        #   rownames(outi) <- NULL
-        #   outk[[k]] <- outi
-        # }
+
       }
 
     }

@@ -1,0 +1,161 @@
+---
+title: "Medidas de tendencia central"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{medias}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(enaho)
+```
+
+Se pueden calcular medidas de tendencia central sobre cualquier variable de un objeto leído con `leer.inei()`
+o `leer.inei.web()`. Por ejemplo, para calcular las medidas de tendencia central de la variable `"P7061"`
+del primer trimestre de 2011, primero cargamos la base:
+
+```{r}
+dir <- system.file("extdata", package = "enaho") # directorio con las bases
+leido <- leer.inei(modulo = 37,periodos = 2011,tipo = c("t1"),directorio = dir)
+leido
+```
+
+Una vez cargada, podemos calcular las medidas de tendencia central de una variable usando `media.enaho()`,
+donde `x` será el nombre de la(s) variable(s), `base` será el objeto leído, y `pesos` será el nombre de la variable que contiene los pesos:
+```{r}
+media.enaho(x = "P7061", base = leido, pesos = "FACTRIM")
+```
+
+Como vemos, se genera una tabla con las medidas de tendencia central de la variable.
+
+
+
+## Cálculo por estratos
+
+Podemos calcular medidas de tendencia central tomando en cuenta diversos **estratos** o grupos. Estos pueden ser cualquier variable de `base`. Por ejemplo, usando la variable `DOMINIO`:
+
+
+```{r}
+media.enaho(x = "P7061",base = leido, pesos = "FACTRIM",
+                 estratos = "DOMINIO")
+```
+
+
+Además de usar cualquier variable, también es posible calcular resultados por región y por área geográfica. 
+
+### Cálculo por región 
+
+Para hacerlo por **región**, usamos `"region"`:
+
+```{r}
+media.enaho(x = "P7061",base = leido, pesos = "FACTRIM",
+                 estratos = "region")
+```
+
+
+### Cálculo por área geográfica 
+
+Para hacerlo por **área geográfica**, usamos `"area"`:
+
+```{r}
+media.enaho(x = "P7061",base = leido, pesos = "FACTRIM",
+                 estratos = "area")
+```
+
+En el caso del área geográfica, ésta se determina usando la variable `"ESTRATO"` de `base`. 
+Esta variable suele contener 8 categorías, y las categorías 6, 7 y 8 suelen ser consideras rurales. Sin embargo, podemos cambiar esta definición con el argumento `ruralidad` cuyo valor por defecto es `6:8`:
+
+```{r}
+media.enaho(x = "P7061",base = leido, pesos = "FACTRIM",
+                 estratos = "area",
+                 ruralidad = 7:8)
+```
+
+
+### Combinación de estratos
+
+Si utilizamos más de un estrato, por defecto no serán halladas las medidas de tendencia central de la combinación de ellos:
+
+```{r}
+media.enaho(x = "P7061",base = leido, pesos = "FACTRIM",
+                 estratos = c("area","DOMINIO"))
+```
+
+Pero es posible combinar estratos usando el argumento `combinarestratos = TRUE`:
+
+
+```{r}
+media.enaho(x = "P7061",base = leido, pesos = "FACTRIM",
+                 estratos = c("area","DOMINIO"),
+                 combinarestratos = TRUE)
+```
+
+## Cálculo de más de un período
+
+Si más de un período es leído por `leer.inei()` o `leer.inei.web()` se genera una lista. Si bien esta lista se puede combinar, no siempre es posible:
+
+```{r}
+leido2 <- leer.inei(modulo = 37,periodos = c(2011,2024),tipo = c("t1"),directorio = dir,
+                   combinar = TRUE)
+class(leido2)
+```
+
+Sin embargo, sí es posible calcular medidas de tendencia central sobre esta lista:
+
+```{r}
+media.enaho(x = "P7061", base = leido2, pesos = NULL)
+```
+
+
+Cuando introducimos los **pesos**, es posible que exista un error porque no necesariamente todos los períodos tienen el mismo nombre para los pesos:
+
+```{r,error=TRUE}
+media.enaho(x = "P7061", base = leido2, pesos = "FACTRIM")
+```
+
+Esto lo podemos resolver haciendo un vector con los nombres para cada período:
+
+```{r,error=FALSE}
+media.enaho(x = "P7061", base = leido2, pesos = c("FACTRIM","FACTOR"),)
+```
+
+## Múltiples variables
+
+También podemos calcular múltiples variables a la vez, con las mismas opciones mostradas:
+
+```{r,error=FALSE}
+media.enaho(x = c("P7061","P7062"), base = leido2, pesos = c("FACTRIM","FACTOR"),
+                 estratos = "area")
+```
+
+
+## Opciones adicionales
+
+
+
+Para la  **estimación de la varianza** podemos optar por el método insesgado (n-1) o por máxima verosimilitud (n):
+```{r}
+media.enaho(x = "P7061", base = leido, pesos = "FACTRIM",
+            var = "insesgado")
+```
+
+```{r}
+media.enaho(x = "P7061", base = leido, pesos = "FACTRIM",
+            var = "MV")
+```
+
+
+Podemos imprimir los resultados con un número específico de  **decimales**:
+```{r}
+media.enaho(x = "P7061", base = leido, pesos = "FACTRIM",
+                 decimales = 3)
+```
+

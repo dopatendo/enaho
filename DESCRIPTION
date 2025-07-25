@@ -1,7 +1,7 @@
 Package: enaho
 Type: Package
 Title: Encuesta Nacional de Hogares (Peruvian Home National Survey)
-Version: 0.2.1
+Version: 0.2.5
 Authors@R: c(person(given = "Andrés",
                     family = "Christiansen",
                     role = c("aut", "cre"),
@@ -18,3 +18,7 @@ Depends:
     R (>= 3.5)
 Imports: haven, tibble
 URL: https://dopatendo.github.io/enaho/
+Suggests: 
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr

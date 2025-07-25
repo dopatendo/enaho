@@ -15,7 +15,7 @@
 #' @param dividirperiodos un valor lógico que indica si los resultados deben ser separados por período.
 #' @param ruralidad un vector numérico que indica que valores de la variable \code{"ESTRATO"} deben ser considerados
 #' rurales. Usualmente del 6 al 8.
-#' @param pesos una cadena de caracteres con el nombre de la variable que representa los pesos.
+#' @param pesos una cadena de caracteres con el nombre de la(s) variable(s) que representan los pesos.
 #' Si es \code{NULL} las proporciones se estiman sin pesarlas.
 #' @param forzaretiquetas un valor lógico que indica si las etiquetas del período con más etiquetas deben
 #' ser forzadas para todos los períodos. No es poco común que las etiquetas de una variable cambien con los
@@ -47,7 +47,7 @@ proporcion.enaho <- function(x,
                              combinarestratos = FALSE,
                              dividirperiodos = FALSE,
                              ruralidad = 6:8,
-                             pesos = "FACTOR07",
+                             pesos = NULL,
                              forzaretiquetas = FALSE,
                              porcentaje = FALSE,
                              decimales = NULL,
@@ -115,7 +115,13 @@ proporcion.enaho <- function(x,
   outk <- vector("list",length(uper))
   if(length(uper)==1){dividirperiodos <- FALSE}
 
+  if(length(pesos)==1){
+    pesos <- rep(pesos,length(uper))
+  }
+
   for(k in 1:length(uper)){
+
+
 
 
 
@@ -193,11 +199,12 @@ proporcion.enaho <- function(x,
 
 
         xx <- untibble(basek[,x])[,1]
+        pesok <- pesos[k]
 
-        if(is.null(pesos)){
+        if(is.null(pesok)){
           pp <- rep(1,nrow(basek))
         }else{
-          pp <- untibble(basek[,pesos])[,1]
+          pp <- untibble(basek[,pesok])[,1]
         }
 
 
@@ -265,21 +272,21 @@ proporcion.enaho <- function(x,
         }
         outi <- do.call(rbind,outi)
 
-        ##?????
-        if(!formatolargo){
+        # ##?????
+        # if(!formatolargo){
           outk[[k]] <- outi
-        }else{
-          novan <- c(.tildes("peri"),"Estrato", "Nombre","Variable")
-          outi <- stats::reshape(outi,
-                          idvar = novan,
-                          varying = list(names(outi)[!names(outi) %in% novan]),
-                          direction = "long",
-                          timevar = .tildes("cate"),
-                          times = names(outi)[!names(outi) %in% novan],
-                          v.names = .tildes("prop"))
-          rownames(outi) <- NULL
-          outk[[k]] <- outi
-        }
+        # }else{
+        #   novan <- c(.tildes("peri"),"Estrato", "Nombre","Variable")
+        #   outi <- stats::reshape(outi,
+        #                   idvar = novan,
+        #                   varying = list(names(outi)[!names(outi) %in% novan]),
+        #                   direction = "long",
+        #                   timevar = .tildes("cate"),
+        #                   times = names(outi)[!names(outi) %in% novan],
+        #                   v.names = .tildes("prop"))
+        #   rownames(outi) <- NULL
+        #   outk[[k]] <- outi
+        # }
       }
 
     }
@@ -299,6 +306,24 @@ proporcion.enaho <- function(x,
   if(inherits(outf,"try-error")){
     outf <- .comb.prop(outk,forzaretiquetas = forzaretiquetas)
   }
+
+
+  ##?????
+  if(!formatolargo){
+    outf <- outf
+  }else{
+    novan <- c(.tildes("peri"),"Estrato", "Nombre","Variable")
+    outf <- stats::reshape(outf,
+                           idvar = novan,
+                           varying = list(names(outf)[!names(outf) %in% novan]),
+                           direction = "long",
+                           timevar = .tildes("cate"),
+                           times = names(outf)[!names(outf) %in% novan],
+                           v.names = .tildes("prop"))
+    rownames(outf) <- NULL
+    outf <- outf
+  }
+
 
   if(!dividirperiodos)
     return(outf)
@@ -329,7 +354,7 @@ proporcion.enaho <- function(x,
 
   }
 
-  if(!forzaretiquetas){
+
     if(ncol){
       lna <- lapply(LNA,function(x){
         x <- gsub(" ","",iconv(x=toupper(x),
@@ -341,6 +366,8 @@ proporcion.enaho <- function(x,
     }else{
       lna <- LNA
     }
+
+  if(!forzaretiquetas){
 
     ord <- do.call(rbind,lapply(1:length(lista),function(i) {
       cbind.data.frame(num = 1:length(LNA[[i]]),

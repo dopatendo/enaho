@@ -7,3 +7,4 @@ ztools/
 .DS_Store
 docs
 .gitignore
+inst/doc

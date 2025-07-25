@@ -19,6 +19,21 @@
 
 combinar.inei <- function(x, solocomunes = FALSE){
 
+
+  out <- try(.combinar.inei(x = x, solocomunes = solocomunes),silent = TRUE)
+
+  if(!inherits(out,"try-error"))
+    return(out)
+
+
+  warning("\nNo se pudo combinar la lista porque al menos una variable con el mismo nombre no tiene las mismas etiquetas.")
+  return(x)
+
+
+}
+
+.combinar.inei <- function(x, solocomunes = FALSE){
+
   cln <- lapply(x,colnames)
   ucln <- unique(unlist(cln))
   tt <- as.data.frame(table(unlist(cln)),stringsAsFactors = FALSE)
