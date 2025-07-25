@@ -19,7 +19,7 @@ leer.inei(
 }
 \arguments{
 \item{encuesta}{el nombre de una encuesta del INEI. Las opciones dispobibles son
-\code{"ENAHO"} y \code{"ENAHOpanel"}. No importa si está escrito en mayúscula o minúscula.}
+\code{"ENAHO"}, \code{"ENAHOpanel"} y \code{"ENDES"}. No importa si está escrito en mayúscula o minúscula.}
 
 \item{modulo}{el código del módulo deseado.}
 

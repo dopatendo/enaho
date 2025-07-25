@@ -8,7 +8,7 @@ modulos(encuesta = "ENAHO", modulo = NULL)
 }
 \arguments{
 \item{encuesta}{el nombre de una encuesta del INEI. Las opciones dispobibles son
-\code{"ENAHO"} y \code{"ENAHOpanel"}. No importa si está escrito en mayúscula o minúscula.}
+\code{"ENAHO"}, \code{"ENAHOpanel"} y \code{"ENDES"}. No importa si está escrito en mayúscula o minúscula.}
 
 \item{modulo}{el código de los módulos que mostrar. Si es \code{NULL} muestra todos
 los disponibles. Si no es \code{NULL} muestra los períodos disponibles.}
