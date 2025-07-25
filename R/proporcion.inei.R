@@ -32,7 +32,7 @@
 #' @examples
 #' directorio = system.file("extdata", package = "enaho")
 #' leido <- leer.inei(modulo = 37, periodos = 2011, directorio = directorio, tipo = c("t1","t2"))
-#' proporcion.enaho(x = c("P7061"),base = leido,pesos = "FACTRIM")
+#' proporcion.inei(x = c("P7061"),base = leido,pesos = "FACTRIM")
 #'
 #' @returns un data frame o una lista.
 #'
@@ -41,7 +41,7 @@
 #'
 
 
-proporcion.enaho <- function(x,
+proporcion.inei <- function(x,
                              base,
                              estratos = NULL,
                              combinarestratos = FALSE,
@@ -60,7 +60,7 @@ proporcion.enaho <- function(x,
 
   out <- vector("list",length(x))
   for(i in 1:length(x)){
-    out[[i]] <-   .proporcion.enaho(x = x[i],
+    out[[i]] <-   .proporcion.inei(x = x[i],
                                     base = base,
                                     estratos = estratos,
                                     combinarestratos = combinarestratos,
@@ -85,7 +85,7 @@ proporcion.enaho <- function(x,
 
 }
 
-.proporcion.enaho <- function(x,
+.proporcion.inei <- function(x,
                        base,
                        estratos = NULL,
                        combinarestratos = FALSE,

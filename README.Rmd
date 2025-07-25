@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
 ```
 
 ```{r,echo=FALSE}
-overridecran <- TRUE
+overridecran <- FALSE
 ```
 
 # enaho

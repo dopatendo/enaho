@@ -28,10 +28,10 @@ leido <- leer.inei(modulo = 37,periodos = 2011,tipo = c("t1"),directorio = dir)
 leido
 ```
 
-Una vez cargada, podemos calcular las proporciones de una variable usando `proporcion.enaho()`,
+Una vez cargada, podemos calcular las proporciones de una variable usando `proporcion.inei()`,
 donde `x` será el nombre de la(s) variable(s), `base` será el objeto leído, y `pesos` será el nombre de la variable que contiene los pesos:
 ```{r}
-proporcion.enaho(x = "P7061", base = leido, pesos = "FACTRIM")
+proporcion.inei(x = "P7061", base = leido, pesos = "FACTRIM")
 ```
 
 Como vemos, se genera una tabla con todas las categorías de la variable.
@@ -44,7 +44,7 @@ Podemos calcular proporciones tomando en cuenta diversos **estratos** o grupos. 
 
 
 ```{r}
-proporcion.enaho(x = "P7061",base = leido, pesos = "FACTRIM",
+proporcion.inei(x = "P7061",base = leido, pesos = "FACTRIM",
                  estratos = "DOMINIO")
 ```
 
@@ -57,7 +57,7 @@ Además de usar cualquier variable, también es posible calcular resultados por 
 Para hacerlo por **región**, usamos `"region"`:
 
 ```{r}
-proporcion.enaho(x = "P7061",base = leido, pesos = "FACTRIM",
+proporcion.inei(x = "P7061",base = leido, pesos = "FACTRIM",
                  estratos = "region")
 ```
 
@@ -67,7 +67,7 @@ proporcion.enaho(x = "P7061",base = leido, pesos = "FACTRIM",
 Para hacerlo por **área geográfica**, usamos `"area"`:
 
 ```{r}
-proporcion.enaho(x = "P7061",base = leido, pesos = "FACTRIM",
+proporcion.inei(x = "P7061",base = leido, pesos = "FACTRIM",
                  estratos = "area")
 ```
 
@@ -75,7 +75,7 @@ En el caso del área geográfica, ésta se determina usando la variable `"ESTRAT
 Esta variable suele contener 8 categorías, y las categorías 6, 7 y 8 suelen ser consideras rurales. Sin embargo, podemos cambiar esta definición con el argumento `ruralidad` cuyo valor por defecto es `6:8`:
 
 ```{r}
-proporcion.enaho(x = "P7061",base = leido, pesos = "FACTRIM",
+proporcion.inei(x = "P7061",base = leido, pesos = "FACTRIM",
                  estratos = "area",
                  ruralidad = 7:8)
 ```
@@ -86,7 +86,7 @@ proporcion.enaho(x = "P7061",base = leido, pesos = "FACTRIM",
 Si utilizamos más de un estrato, por defecto no serán halladas las proporciones de la combinación de ellos:
 
 ```{r}
-proporcion.enaho(x = "P7061",base = leido, pesos = "FACTRIM",
+proporcion.inei(x = "P7061",base = leido, pesos = "FACTRIM",
                  estratos = c("area","DOMINIO"))
 ```
 
@@ -94,7 +94,7 @@ Pero es posible combinar estratos usando el argumento `combinarestratos = TRUE`:
 
 
 ```{r}
-proporcion.enaho(x = "P7061",base = leido, pesos = "FACTRIM",
+proporcion.inei(x = "P7061",base = leido, pesos = "FACTRIM",
                  estratos = c("area","DOMINIO"),
                  combinarestratos = TRUE)
 ```
@@ -112,7 +112,7 @@ class(leido2)
 Sin embargo, sí es posible calcular proporciones sobre esta lista:
 
 ```{r}
-proporcion.enaho(x = "P7061", base = leido2, pesos = NULL)
+proporcion.inei(x = "P7061", base = leido2, pesos = NULL)
 ```
 
 Es importante notar que las etiquetas de las categorías han cambiado. Esto se debe a que 2011 y 2024 no comparten exactamente las mismas etiquetas. Para resolver este problema se remueven los espacios en blanco y se convierten a mayúsculas. Pero como se ve en el ejemplo, seguimos teniendo etiquetas que no coinciden.
@@ -120,21 +120,21 @@ Es importante notar que las etiquetas de las categorías han cambiado. Esto se d
 Sin embargo, si creemos que las etiquetas tienen el mismo orden podemos forzarlas a que sean las mismas. Para ello, la función utilizará las etiquetas con mayor número de categorías del período más reciente:
 
 ```{r}
-proporcion.enaho(x = "P7061", base = leido2, pesos = NULL,
+proporcion.inei(x = "P7061", base = leido2, pesos = NULL,
                  forzaretiquetas = TRUE)
 ```
 
 Cuando introducimos los **pesos**, es posible que exista un error porque no necesariamente todos los períodos tienen el mismo nombre para los pesos:
 
 ```{r,error=TRUE}
-proporcion.enaho(x = "P7061", base = leido2, pesos = "FACTRIM",
+proporcion.inei(x = "P7061", base = leido2, pesos = "FACTRIM",
                  forzaretiquetas = TRUE)
 ```
 
 Esto lo podemos resolver haciendo un vector con los nombres para cada período:
 
 ```{r,error=FALSE}
-proporcion.enaho(x = "P7061", base = leido2, pesos = c("FACTRIM","FACTOR"),
+proporcion.inei(x = "P7061", base = leido2, pesos = c("FACTRIM","FACTOR"),
                  forzaretiquetas = TRUE)
 ```
 
@@ -143,7 +143,7 @@ proporcion.enaho(x = "P7061", base = leido2, pesos = c("FACTRIM","FACTOR"),
 También podemos calcular múltiples variables a la vez, con las mismas opciones mostradas, el resultado será siempre en formato largo:
 
 ```{r,error=FALSE}
-proporcion.enaho(x = c("P7061","P7062"), base = leido2, pesos = c("FACTRIM","FACTOR"),
+proporcion.inei(x = c("P7061","P7062"), base = leido2, pesos = c("FACTRIM","FACTOR"),
                  estratos = "area", forzaretiquetas = TRUE)
 ```
 
@@ -152,20 +152,20 @@ proporcion.enaho(x = c("P7061","P7062"), base = leido2, pesos = c("FACTRIM","FAC
 
 Podemos imprimir los resultados de una variable en **formato largo**:
 ```{r}
-proporcion.enaho(x = "P7061", base = leido, pesos = "FACTRIM",
+proporcion.inei(x = "P7061", base = leido, pesos = "FACTRIM",
                  formatolargo = TRUE)
 ```
 
 
 Podemos imprimir los resultados como **porcentaje**:
 ```{r}
-proporcion.enaho(x = "P7061", base = leido, pesos = "FACTRIM",
+proporcion.inei(x = "P7061", base = leido, pesos = "FACTRIM",
                  porcentaje = TRUE)
 ```
 
 Podemos imprimir los resultados con un número específico de  **decimales**:
 ```{r}
-proporcion.enaho(x = "P7061", base = leido, pesos = "FACTRIM",
+proporcion.inei(x = "P7061", base = leido, pesos = "FACTRIM",
                  decimales = 3)
 ```
 

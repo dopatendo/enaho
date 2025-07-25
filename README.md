@@ -19,7 +19,7 @@ Badge](https://img.shields.io/badge/dependencies-haven,_tibble-brightgreen)
 
 ## Instalación
 
-Puede instalar la versión de CRAN (0.2.5) usando:
+Puede instalar la versión de CRAN (0.2.0) usando:
 
 ``` r
 install.packages("dopatendo/enaho")

@@ -3,7 +3,7 @@
 #' Estima medias de variables en bases leídas con \code{\link{leer.inei}} o
 #' \code{\link{leer.inei.web}}.
 #'
-#' @inheritParams proporcion.enaho
+#' @inheritParams proporcion.inei
 #' @param var una cadena de texto que indica el método a usar para la varianza:
 #' \code{"insesgado"} calcula la estimación insesgada (n-1);
 #' \code{"MV"} calcula la estimación de máxima verosimilitud.
@@ -11,14 +11,14 @@
 #' @examples
 #' directorio = system.file("extdata", package = "enaho")
 #' leido <- leer.inei(modulo = 37, periodos = 2011, directorio = directorio, tipo = c("t1","t2"))
-#' media.enaho(x = c("P7061"),base = leido,pesos = "FACTRIM")
+#' media.inei(x = c("P7061"),base = leido,pesos = "FACTRIM")
 #'
 #' @returns un data frame o una lista.
 #'
 #' @export
 #'
 #'
-media.enaho <- function(x,
+media.inei <- function(x,
                         base,
                         estratos = NULL,
                         combinarestratos = FALSE,
@@ -41,7 +41,7 @@ media.enaho <- function(x,
 
   out <- vector("list",length(x))
   for(i in 1:length(x)){
-    out[[i]] <-   .media.enaho(x = x[i],
+    out[[i]] <-   .media.inei(x = x[i],
                                base = base,
                                estratos = estratos,
                                combinarestratos = combinarestratos,
@@ -64,7 +64,7 @@ media.enaho <- function(x,
 
 }
 
-.media.enaho <- function(x,
+.media.inei <- function(x,
                          base,
                          estratos = NULL,
                          combinarestratos = FALSE,
