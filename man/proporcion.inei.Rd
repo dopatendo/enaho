@@ -25,7 +25,7 @@ proporcion.inei(
 o en forma de lista.}
 
 \item{estratos}{una cadena de caracteres con los nombres de las variables que deben ser consideradas como estratos.
-Además se puede usar \code{"area"} y \code{"region"}, con las que se calcularán los resultados para los
+Además se puede usar (sólo en las bases de la ENAHO) \code{"area"} y \code{"region"}, con las que se calcularán los resultados para los
 estratos urbano y rural, y para cada región.}
 
 \item{combinarestratos}{un valor lógico que indica si debe calcularse también la combinación entre estratos.

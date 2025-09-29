@@ -52,7 +52,7 @@ Vemos que en 2011 hay 8 dominios (no etiquetados) y los resultados se presentan 
 
 Además de usar cualquier variable, también es posible calcular resultados por región y por área geográfica. 
 
-### Cálculo por región 
+### Cálculo por región (sólo en bases de la ENAHO)
 
 Para hacerlo por **región**, usamos `"region"`:
 
@@ -62,7 +62,7 @@ proporcion.inei(x = "P7061",base = leido, pesos = "FACTRIM",
 ```
 
 
-### Cálculo por área geográfica 
+### Cálculo por área geográfica (sólo en bases de la ENAHO)
 
 Para hacerlo por **área geográfica**, usamos `"area"`:
 
